@@ -21,6 +21,7 @@ namespace WebHookerServer.Controllers
                 var connectionId = ClientHub.ClientConnectionIdMap[id]; 
                 using (var ms = new MemoryStream())
                 {
+                    Request.InputStream.Position = 0;
                     Request.InputStream.CopyTo(ms);
                     var request = new WebHookerClient.Request()
                     {
