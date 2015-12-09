@@ -7,7 +7,7 @@ Main difference is: WebHooker is .NET based and has only 1 feature - forwards we
 
 Benefit over ngrok is that WebHooker supports host headers for free:
   
-  webhookerclient -t http://yourhost:port
+  webhookerclient.exe -t http://yourhost:port
 
 
 # Usage
