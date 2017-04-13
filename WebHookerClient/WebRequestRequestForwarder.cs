@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace WebHookerClient
 {
@@ -18,7 +19,12 @@ namespace WebHookerClient
         }
         public void Forward(Request data)
         {
-            var request = HttpWebRequest.CreateHttp(this.targetUrl);
+            var url = targetUrl;
+            if (data.QueryString?.Count > 0)
+            {
+                url += "?" + string.Join("&", data.QueryString.Select(kvp => string.Format("{0}={1}", kvp.Key, kvp.Value)));
+            }
+            var request = HttpWebRequest.CreateHttp(url);
             request.Method = data.HttpMethod;
             foreach (var header in data.Headers)
             {
@@ -39,9 +45,16 @@ namespace WebHookerClient
                 }
             }
 
-            using (var response = request.GetResponse())
+            try
             {
+                using (var response = request.GetResponse())
+                {
 
+                }
+            }
+            catch (WebException ex)
+            {
+                Console.WriteLine(ex.ToString());
             }
         }
         private static void AddRestrictedHeader(HttpWebRequest request, KeyValuePair<string, string> header)

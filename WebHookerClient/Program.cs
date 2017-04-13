@@ -16,7 +16,7 @@ namespace WebHookerClient
 
         static void Main(string[] args)
         {
-            //args = new[] { "-t", "http://localhost:123" };
+            //args = new[] { "-t", "http://localhost:63607" };
             CommandLineOptions options = GetOptionsOrExit(args);
             
             var serverUrl = options.ServerUrl;

@@ -27,7 +27,9 @@ namespace WebHookerServer.Controllers
                     {
                         HttpMethod = Request.HttpMethod,
                         Headers = Request.Headers.AllKeys.ToDictionary(k => k, k => Request.Headers[k]),
-                        Body = ms.ToArray()
+                        Body = ms.ToArray(),
+                        QueryString = Request.QueryString.AllKeys.ToDictionary(key => key, key => Request.QueryString[key]),
+
                     };
                     var hub = GlobalHost.ConnectionManager.GetHubContext<ClientHub, WebHookerClient.IClient>();
                     hub.Clients.Client(connectionId).Forward(request);
